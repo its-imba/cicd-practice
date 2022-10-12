@@ -11,7 +11,13 @@
             }
             stage('Install docker') {
                 steps {
-                        sh "sudo apt install docker.io"
+                        sh "sudo apt-get remove docker docker-engine docker.io containerd runc"
+                        sh "sudo apt-get update"
+                        sh "sudo apt-get install \
+                                ca-certificates \
+                                curl \
+                                gnupg \
+                                lsb-release"
                 }
             }
             stage('Deploy') {
